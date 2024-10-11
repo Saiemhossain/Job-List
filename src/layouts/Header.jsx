@@ -2,6 +2,7 @@
 import ThemeToggle from '@/components/mode-toggle'; 
 import { Button } from '@/components/ui/button';
 import { SignedOut, SignedIn, SignIn, UserButton } from '@clerk/clerk-react';
+import { Briefcase } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Header() {
@@ -15,9 +16,9 @@ export default function Header() {
 
   return (
     <header className="py-10">
-      <div className="flex justify-between max-w-4xl mx-auto">
+      <div className="flex justify-between max-w-4xl mx-auto items-center">
         <div className="logo font-thin text-2xl">JobRex</div>
-        <div>
+        <div className="flex items-center gap-4">
           <ThemeToggle />
 
           {/* Show SignIn button when user is signed out */}
@@ -27,7 +28,21 @@ export default function Header() {
 
           {/* Show UserButton when user is signed in */}
           <SignedIn>
-            <UserButton />
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: 'size-10',
+                },
+              }}
+            >
+              <UserButton.MenuItems>
+                <UserButton.Link
+                  label="My Jobs"
+                  labelIcon={<Briefcase size={18} />}
+                  href="/my-jobs"
+                />
+              </UserButton.MenuItems>
+            </UserButton>
           </SignedIn>
 
           {/* Display SignIn modal when 'showSignIn' is true */}
@@ -36,7 +51,10 @@ export default function Header() {
               className="fixed flex inset-0 items-center justify-center bg-slate-800/70"
               onClick={handleOverlayClick}
             >
-              <SignIn />
+              <SignIn
+                // signUpForceRedirectUrl="/onboard"
+                // signUpFallbackRedirectUrl='/'
+              />
             </div>
           )}
         </div>
