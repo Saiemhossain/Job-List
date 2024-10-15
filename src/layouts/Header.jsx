@@ -48,7 +48,7 @@ export default function Header() {
           {/* Display SignIn modal when 'showSignIn' is true */}
           {showSignIn && (
             <div
-              className="fixed flex inset-0 items-center justify-center bg-slate-800/70"
+              className="fixed flex inset-0 items-center justify-center bg-slate-800/70 z-50"
               onClick={handleOverlayClick}
             >
               <SignIn
