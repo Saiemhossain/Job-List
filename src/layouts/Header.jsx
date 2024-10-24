@@ -3,16 +3,25 @@ import ThemeToggle from '@/components/mode-toggle';
 import { Button } from '@/components/ui/button';
 import { SignedOut, SignedIn, SignIn, UserButton } from '@clerk/clerk-react';
 import { Briefcase } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Header() {
   const [showSignIn, setShowSignIn] = useState(false);
+  const [search, setSearch] = useSearchParams()
 
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
       setShowSignIn(false);
+      setSearch({})
     }
   };
+
+  useEffect(() => {
+    if (search.get("sign-in")) {
+      setShowSignIn(true)
+    }
+  }, [search]);
 
   return (
     <header className="py-10">
@@ -52,8 +61,8 @@ export default function Header() {
               onClick={handleOverlayClick}
             >
               <SignIn
-                // signUpForceRedirectUrl="/onboard"
-                // signUpFallbackRedirectUrl='/'
+                signUpForceRedirectUrl="/onboard"
+              fallbackRedirectUrl='/onboard'
               />
             </div>
           )}
