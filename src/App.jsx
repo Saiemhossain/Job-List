@@ -10,6 +10,8 @@ import MyJob from './pages/MyJob';
 import Home from './pages/Home';
 import JobDetails from './pages/JobDetails';
 import Onboard from './pages/Onboard';
+import AuthenticateRoute from './components/AuthenticateRoute';
+import PostJob from './pages/PostJob';
 
 const router = createBrowserRouter([
   {
@@ -25,19 +27,43 @@ const router = createBrowserRouter([
       },
       {
         path: '/jobs',
-        element: <AllJobs />,
+        element: (
+          <AuthenticateRoute>
+            <AllJobs />
+          </AuthenticateRoute>
+        ),
       },
       {
         path: '/my-jobs',
-        element: <MyJob />,
+        element: (
+          <AuthenticateRoute>
+            <MyJob />,
+          </AuthenticateRoute>
+        ),
       },
       {
         path: '/job/:id',
-        element: <JobDetails/>
+        element: (
+          <AuthenticateRoute>
+            <JobDetails />,
+          </AuthenticateRoute>
+        ),
       },
       {
         path: '/onboard',
-        element: <Onboard/>
+        element: (
+          <AuthenticateRoute>
+            <Onboard />,
+          </AuthenticateRoute>
+        ),
+      },
+      {
+        path: '/post-job',
+        element: (
+          <AuthenticateRoute>
+            <PostJob />
+          </AuthenticateRoute>
+        ),
       },
     ],
   },
